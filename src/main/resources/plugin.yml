@@ -1,0 +1,16 @@
+name: Cheats
+version: 1.0
+author: UnleqitQ
+main: me.unleqitq.cheats.Cheats
+load: STARTUP
+desctiption: Cheat Plugin
+depend: []
+softdepend: []
+api-version: 1.17
+commands:
+  cheats:
+    description: Cheat A Bit
+    permission: cheats.command.cheats
+  ctroll:
+    description: A Bit of trolling never hurt
+    permission: cheats.command.troll
