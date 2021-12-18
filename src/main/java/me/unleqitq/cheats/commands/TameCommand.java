@@ -21,6 +21,12 @@ class TameCommand extends Command {
 			if (args.length == 0) {
 				boolean prev = TameListener.enabled.getOrDefault(((Player) sender).getUniqueId(), false);
 				TameListener.enabled.put(((Player) sender).getUniqueId(), !prev);
+				if (prev) {
+					Cheats.writePlayer(sender, "Tame turned off");
+				}
+				else {
+					Cheats.writePlayer(sender, "Tame turned on");
+				}
 			}
 		}
 	}
