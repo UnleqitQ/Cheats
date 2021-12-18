@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nonnull;
 
+import me.unleqitq.cheats.listeners.TameListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandExecutor;
@@ -46,6 +47,7 @@ public class Cheats extends JavaPlugin {
 		new ReachListener();
 		new ReverseListener();
 		new AttractionListener();
+		new TameListener();
 		
 		new BadBowAimListener();
 		new BadPearlAimListener();

@@ -15,6 +15,7 @@ public class CheatCommand extends Command {
 		register(new ArrowProtectCommand());
 		register(new ForceFieldCommand());
 		register(new ItemForceFieldCommand());
+		register(new TameCommand());
 	}
 	
 	
