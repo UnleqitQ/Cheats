@@ -2,18 +2,10 @@ package me.unleqitq.cheats.listeners;
 
 import me.unleqitq.cheats.Cheats;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.FluidCollisionMode;
-import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.*;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityTameEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.util.RayTraceResult;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.spigotmc.event.entity.EntityMountEvent;
 
 import java.util.UUID;
@@ -41,6 +33,20 @@ public class TameListener implements Listener {
 						entity.setOwner(player);
 						Cheats.writePlayer(player, "Successfully tamed " + entity.getType());
 					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onTame(PlayerInteractEntityEvent event) {
+		if (event.getRightClicked() instanceof Tameable) {
+			if (enabled.getOrDefault(event.getPlayer().getUniqueId(), false)) {
+				Tameable entity = (Tameable) event.getRightClicked();
+				if (!entity.isTamed()) {
+					entity.setTamed(true);
+					entity.setOwner(event.getPlayer());
+					Cheats.writePlayer(event.getPlayer(), "Successfully tamed " + entity.getType());
 				}
 			}
 		}

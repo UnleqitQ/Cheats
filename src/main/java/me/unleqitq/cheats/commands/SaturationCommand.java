@@ -21,21 +21,23 @@ class SaturationCommand extends Command {
 		if (sender instanceof Player) {
 			if (args.length == 2) {
 				try {
-					double range = Double.valueOf(args[0]);
-					double force = Double.valueOf(args[1]);
+					double range = Double.parseDouble(args[0]);
+					double force = Double.parseDouble(args[1]);
 					range = Math.abs(range);
 					ArrowProtectTask.values.put(((Player) sender).getUniqueId(), range);
 					ArrowProtectTask.forces.put(((Player) sender).getUniqueId(), force);
+				} catch (NumberFormatException ex) {
+					Cheats.writePlayer(sender, "Please type in a number");
 				}
-				catch (Exception ex) {}
 			}
 			else if (args.length == 1) {
 				try {
-					double range = Double.valueOf(args[0]);
+					double range = Double.parseDouble(args[0]);
 					ArrowProtectTask.values.put(((Player) sender).getUniqueId(), range);
 					ArrowProtectTask.forces.put(((Player) sender).getUniqueId(), 1.0);
+				} catch (NumberFormatException ex) {
+					Cheats.writePlayer(sender, "Please type in a number");
 				}
-				catch (Exception ex) {}
 			}
 			else if (args.length == 0) {
 				ArrowProtectTask.values.remove(((Player) sender).getUniqueId());

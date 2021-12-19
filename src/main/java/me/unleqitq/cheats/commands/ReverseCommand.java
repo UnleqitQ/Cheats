@@ -21,13 +21,14 @@ class ReverseCommand extends Command {
 		if (sender instanceof Player) {
 			if (args.length == 1) {
 				try {
-					double ratio = Double.valueOf(args[0]);
+					double ratio = Double.parseDouble(args[0]);
 					if (ratio < 0) {
 						Cheats.writePlayer(sender, "ratio has to be at least 0");
 					}
 					ReverseListener.values.put(((Player) sender).getUniqueId(), ratio);
+				} catch (NumberFormatException ex) {
+					Cheats.writePlayer(sender, "Please type in a number");
 				}
-				catch (Exception ex) {}
 			}
 			else if (args.length == 0) {
 				ReverseListener.values.remove(((Player) sender).getUniqueId());

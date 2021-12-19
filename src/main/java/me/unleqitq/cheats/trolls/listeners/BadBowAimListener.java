@@ -4,14 +4,12 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftArrow;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.util.Vector;
 
 import me.unleqitq.cheats.Cheats;
@@ -30,10 +28,10 @@ public class BadBowAimListener implements Listener {
 	@EventHandler
 	public void onShoot(EntityShootBowEvent event) {
 		if (event.getEntityType() == EntityType.PLAYER) {
-			CraftPlayer p = (CraftPlayer) event.getEntity();
+			Player p = (Player) event.getEntity();
 			if (values.containsKey(p.getUniqueId())) {
-				if (event.getProjectile() != null && event.getProjectile() instanceof Arrow) {
-					CraftArrow arrow = (CraftArrow) event.getProjectile();
+				if (event.getProjectile() instanceof Arrow) {
+					Arrow arrow = (Arrow) event.getProjectile();
 					double ratio = values.get(p.getUniqueId());
 					if (arrow.getVelocity().length() > 0) {
 						Vector vel = arrow.getVelocity();

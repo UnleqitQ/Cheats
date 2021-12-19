@@ -1,24 +1,23 @@
 package me.unleqitq.cheats.trolls.commands;
 
+import me.unleqitq.cheats.Cheats;
+import me.unleqitq.cheats.trolls.listeners.TameTrollListener;
+import me.unleqitq.command.Command;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import me.unleqitq.cheats.Cheats;
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-import me.unleqitq.cheats.trolls.listeners.BadBowAimListener;
-import me.unleqitq.command.Command;
-
-
-class BadBowAimCommand extends Command {
+class TameTrollCommand extends Command {
 	
 	
-	public BadBowAimCommand() {
-		super("badbowaim");
+	public TameTrollCommand() {
+		super("tame");
 	}
 	
 	@Override
@@ -26,19 +25,15 @@ class BadBowAimCommand extends Command {
 		if (args.length == 1) {
 			if (Bukkit.getPlayer(args[0]) != null) {
 				Player p = Objects.requireNonNull(Bukkit.getPlayer(args[0]));
-				BadBowAimListener.values.remove(p.getUniqueId());
-			}
-		}
-		else if (args.length == 2) {
-			try {
-				if (Bukkit.getPlayer(args[0]) != null) {
-					Player p = Objects.requireNonNull(Bukkit.getPlayer(args[0]));
-					double ratio = Double.parseDouble(args[1]);
-					ratio = Math.abs(ratio);
-					BadBowAimListener.values.put(p.getUniqueId(), ratio);
+				boolean prev = TameTrollListener.enabled.getOrDefault(p.getUniqueId(), false);
+				TameTrollListener.enabled.put(p.getUniqueId(), !prev);
+				if (prev) {
+					Cheats.writePlayer(sender, "Tame troll turned off");
 				}
-			} catch (NumberFormatException ex) {
-				Cheats.writePlayer(sender, "Please type in a number");
+				else {
+					Cheats.writePlayer(sender, "Tame troll turned on");
+				}
+				
 			}
 		}
 	}

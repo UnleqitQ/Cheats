@@ -12,6 +12,7 @@ public class TrollCommand extends Command {
 		register(new BadBowAimCommand());
 		register(new BadPearlAimCommand());
 		register(new HurtCommand());
+		register(new TameTrollCommand());
 	}
 	
 	
