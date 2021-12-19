@@ -3,14 +3,13 @@ package me.unleqitq.cheats.trolls.commands;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
+import java.util.Objects;
 
 import me.unleqitq.cheats.Cheats;
-import me.unleqitq.cheats.trolls.listeners.BadBowAimListener;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import me.unleqitq.cheats.trolls.listeners.BadPearlAimListener;
 import me.unleqitq.command.Command;
 
@@ -25,24 +24,22 @@ class BadPearlAimCommand extends Command {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		if (args.length == 1) {
-			try {
-				if (Bukkit.getPlayer(args[0]) != null) {
-					CraftPlayer p = (CraftPlayer) Bukkit.getPlayer(args[0]);
-					BadPearlAimListener.values.remove(p.getUniqueId());
-				}
+			if (Bukkit.getPlayer(args[0]) != null) {
+				Player p = Objects.requireNonNull(Bukkit.getPlayer(args[0]));
+				BadPearlAimListener.values.remove(p.getUniqueId());
 			}
-			catch (Exception ex) {}
 		}
 		else if (args.length == 2) {
 			try {
 				if (Bukkit.getPlayer(args[0]) != null) {
-					CraftPlayer p = (CraftPlayer) Bukkit.getPlayer(args[0]);
-					double ratio = Double.valueOf(args[1]);
+					Player p = Objects.requireNonNull(Bukkit.getPlayer(args[0]));
+					double ratio = Double.parseDouble(args[1]);
 					ratio = Math.abs(ratio);
 					BadPearlAimListener.values.put(p.getUniqueId(), ratio);
 				}
+			} catch (NumberFormatException ex) {
+				Cheats.writePlayer(sender, "Please type in a number");
 			}
-			catch (Exception ex) {}
 		}
 	}
 	
